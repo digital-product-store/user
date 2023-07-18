@@ -1,0 +1,101 @@
+openapi: 3.0.3
+info:
+  title: User Service API
+  description: |-
+    Provides an API helps user to authenticate and other services to get user details
+  contact:
+    email: baris@dev.local
+  version: 0.1.0
+tags:
+  - name: health
+    description: Service healthiness
+  - name: auth
+    description: Authentication
+  - name: private
+    description: Private endpoints
+paths:
+  /_health:
+    get:
+      tags:
+        - health
+      operationId: health
+      responses:
+        '200':
+          description: service is working properly
+        '503':
+          description: service is not working properly
+  /api/v1/auth:
+    post:
+      tags:
+        - auth
+      operationId: authenticate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCredentials'
+      responses:
+        '200':
+          description: user authenticated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
+        '404':
+          description: user not found
+  /_private/api/v1/user/{uuid}:
+    get:
+      tags:
+        - private
+      operationId: get_user_detail
+      parameters:
+        - name: uuid
+          in: path
+          description: user's uuid
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: user detail
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDetail'
+        '404':
+          description: user not found
+components:
+  schemas:
+    UserCredentials:
+      type: object
+      required:
+        - username
+        - password
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+    Token:
+      type: object
+      required:
+        - token
+      properties:
+        token:
+          type: string
+    UserDetail:
+      type: object
+      required:
+        - uuid
+        - username
+        - fullname
+        - email
+      properties:
+        uuid:
+          type: string
+        username:
+          type: string
+        fullname:
+          type: string
+        email:
+          type: string
