@@ -9,7 +9,7 @@ require (
 	github.com/golang-jwt/jwt/v5 v5.0.0
 	github.com/labstack/echo/v4 v4.11.1
 	go.elastic.co/apm/module/apmechov4/v2 v2.4.3
-	go.elastic.co/apm/v2 v2.4.3
+	go.elastic.co/apm/v2 v2.4.4
 	go.uber.org/zap v1.24.0
 )
 
