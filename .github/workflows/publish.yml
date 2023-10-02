@@ -15,7 +15,7 @@ jobs:
       
       - name: build docker image
         run: |
-          docker build -t user-service .
+          docker build -t user .
         
       - name: push to ecr
         uses: jwalton/gh-ecr-push@v1
@@ -23,5 +23,5 @@ jobs:
           access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           region: eu-west-1
-          local-image: user-service
-          image: user-service:${{ github.sha }}
+          local-image: user
+          image: services/user:${{ github.sha }}
