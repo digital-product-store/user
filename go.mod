@@ -8,6 +8,7 @@ require (
 	github.com/getkin/kin-openapi v0.120.0
 	github.com/golang-jwt/jwt/v5 v5.0.0
 	github.com/labstack/echo/v4 v4.11.1
+	github.com/oapi-codegen/runtime v1.0.0
 	go.elastic.co/apm/module/apmechov4/v2 v2.4.4
 	go.elastic.co/apm/v2 v2.4.4
 	go.uber.org/zap v1.26.0
