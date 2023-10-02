@@ -24,4 +24,4 @@ jobs:
           secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           region: eu-west-1
           local-image: user
-          image: services/user:${{ github.sha }}
+          image: user:${{ github.sha }}
