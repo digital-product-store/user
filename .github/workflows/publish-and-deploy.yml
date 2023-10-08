@@ -45,4 +45,4 @@ jobs:
           aws eks --region ${{ vars.AWS_REGION }} update-kubeconfig --name ${{ vars.CLUSTER_NAME }}
           helm repo add digital-product-store ${{ vars.DIGITAL_PRODUCT_STORE_HELM_CHART }}
           helm repo update
-          helm upgrade user digital-product-store/user --set image.repository=${{ vars.USER_REPOSITORY }},image.tag=${{ github.sha }},service.host=${{ vars.SERVICE_HOST }},jwt.private_key="${{ secrets.SERVICE_JWT_PRIV_KEY }}" --dry-run
+          helm upgrade user digital-product-store/user --set image.repository=${{ vars.USER_REPOSITORY }},image.tag=${{ github.sha }},service.host=${{ vars.SERVICE_HOST }},jwt.private_key="${{ secrets.SERVICE_JWT_PRIV_KEY }}"
