@@ -62,6 +62,14 @@ func createROMemStorage() storage.ROMemStorage {
 			Password: "admin",
 			Roles:    []string{"user", "admin"},
 		},
+		{
+			Uuid:     "881c4ef8-c5cb-4692-9b39-a11da70be643",
+			Email:    "new@test.local",
+			Username: "new",
+			Fullname: "New Manager",
+			Password: "new",
+			Roles:    []string{"user", "admin"},
+		},
 	}
 
 	return storage.NewROMemStorage(users)
