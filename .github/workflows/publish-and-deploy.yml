@@ -31,13 +31,11 @@ jobs:
 
       - name: install kubectl
         uses: azure/setup-kubectl@v3
-        id: install
       
       - name: install helm
         uses: azure/setup-helm@v3
         with:
           version: "v3.13.0"
-        id: install
 
       - name: deploy
         env:
