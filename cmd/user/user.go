@@ -64,10 +64,10 @@ func createROMemStorage() storage.ROMemStorage {
 		},
 		{
 			Uuid:     "881c4ef8-c5cb-4692-9b39-a11da70be643",
-			Email:    "new@test.local",
-			Username: "new",
-			Fullname: "New Manager",
-			Password: "new",
+			Email:    "baris@test.local",
+			Username: "baris",
+			Fullname: "Ybaroj",
+			Password: "baris",
 			Roles:    []string{"user", "admin"},
 		},
 	}
