@@ -1,0 +1,50 @@
+name: publish-and-deploy
+
+on:
+  # pull_request:
+  #   branches: [ main ]
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v3
+      
+      - name: build docker image
+        run: |
+          docker build -t user .
+        
+      - name: push to ecr
+        uses: jwalton/gh-ecr-push@v1
+        with:
+          access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          region: eu-west-1
+          local-image: user
+          image: user:${{ github.sha }}
+      
+      - name: install aws-cli v2
+        uses: unfor19/install-aws-cli-action@v1
+
+      - name: install kubectl
+        uses: azure/setup-kubectl@v3
+        id: install
+      
+      - name: install helm
+        uses: azure/setup-helm@v3
+        with:
+          version: "v3.13.0"
+        id: install
+
+      - name: deploy
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.DEPLOYER_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.DEPLOYER_AWS_SECRET_ACCESS_KEY }}
+        run: |
+          aws eks --region ${{ vars.AWS_REGION }} update-kubeconfig --name ${{ vars.CLUSTER_NAME }}
+          helm repo add digital-product-store ${{ vars.DIGITAL_PRODUCT_STORE_HELM_CHART }}
+          helm repo update
+          helm upgrade user digital-product-store/user --set image.repository=${{ vars.USER_REPOSITORY }},image.tag=${{ github.sha }},service.host=${{ vars.SERVICE_HOST }},jwt.private_key="${{ secrets.SERVICE_JWT_PRIV_KEY }}" --dry-run
