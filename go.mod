@@ -10,7 +10,7 @@ require (
 	github.com/labstack/echo/v4 v4.11.1
 	github.com/oapi-codegen/runtime v1.0.0
 	go.elastic.co/apm/module/apmechov4/v2 v2.4.4
-	go.elastic.co/apm/v2 v2.4.4
+	go.elastic.co/apm/v2 v2.4.5
 	go.uber.org/zap v1.26.0
 )
 
